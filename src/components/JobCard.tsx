@@ -1,8 +1,5 @@
 import tw from 'twin.macro'
-// import styled from 'styled-components'
 import { JobType } from '../types/Types'
-
-
 
 const CardContainer = tw.section`bg-white dark:bg-blue-dark px-[1.8rem] pt-[3rem] pb-[1.8rem] rounded-md relative w-full h-[12.5rem] max-w-[22rem] `
 const ImageContainer = tw.div`w-[2.5rem] h-[2.5rem] p-1 bg-grey-dark rounded-xl flex justify-center items-center absolute -top-4 left-[1.6rem]`

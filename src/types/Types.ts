@@ -1,4 +1,4 @@
-type Details = {
+export type Details = {
   content: string
   items: string[]
 }
@@ -26,4 +26,15 @@ export type JobType = {
 export type SearchPropsTypes = {
 	data: DataTypes[]
 	setData: React.Dispatch<React.SetStateAction<DataTypes[]>>
+}
+
+export type queryTypes = {
+	title: string
+	location: string
+	contractType: boolean
+}
+
+export type filterJobTypes = {
+	query: queryTypes
+	data: DataTypes
 }

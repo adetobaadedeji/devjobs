@@ -20,7 +20,7 @@ interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
 	text?: string
 }
 
-const Button = tw.button`focus:border-violet-dark bg-violet-dark text-white hover:bg-violet-light p-2.5 rounded`
+const Button = tw.button`focus:border-violet-dark bg-violet-dark text-white text-sm hover:bg-violet-light p-2.5 lg:px-4 rounded`
 
 // const CustomButton: React.FC<ButtonProps> = ({icon, text, ...rest }) => {
 const CustomButton = ({ icon, text, ...rest }: ButtonProps) => {
