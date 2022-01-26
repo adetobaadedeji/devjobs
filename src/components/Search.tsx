@@ -1,3 +1,4 @@
+// import { useRef, useState, useEffect } from 'react'
 import { useState } from 'react'
 import tw from 'twin.macro'
 import { ReactComponent as SearchIcon } from '../assets/desktop/icon-search.svg'
@@ -7,21 +8,13 @@ import { ReactComponent as FilterIcon } from '../assets/mobile/icon-filter.svg'
 import { SearchPropsTypes, queryTypes } from '../types/Types'
 import { FormInput } from './Input'
 import CustomButton from './Button'
-// import { filterJob } from '../helpers/helper'
+import { useData } from '../hooks/useData'
 
-const SearchContainer = tw.section`bg-white dark:bg-blue-dark rounded-md dark:shadow-2xl `
-const Form = tw.form`flex items-center bg-white dark:bg-blue-dark text-blue-dark dark:text-grey-light  rounded-md`
-const Label = tw.label``
-const Span = tw.span``
-const Div1 = tw.div`flex items-center w-full relative`
-const Div2 = tw.div`flex items-center md:hidden px-5`
-const Div3 = tw.div`flex items-center md:hidden mr-4`
-const Div4 = tw.div`hidden md:flex items-center w-full relative border-l border-r  dark:border-grey-btn`
-const Div5 = tw.div`hidden md:flex items-center w-full pl-5 pr-4`
-
-
-
-const Search = ({ data, setData }: SearchPropsTypes) => {
+const Search = ({ setData }: SearchPropsTypes) => {
+	const [data] = useData()
+	// const [modal, setModal] = useState(false)
+	// const titleRef = useRef<HTMLInputElement>(null!)
+	// const locationRef = useRef<HTMLInputElement>(null!)
 
 	const [query, setQuery] = useState<queryTypes>({
 		title: '',
@@ -29,29 +22,44 @@ const Search = ({ data, setData }: SearchPropsTypes) => {
 		contractType: false,
 	})
 
-	const onQueryChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
+	const onQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const target = e.target
 		const value = target.type === 'checkbox' ? target.checked : target.value
 		const name = target.name
 		setQuery({ ...query, [name]: value })
 	}
 
-	// const filteredJob = filterJob(query,)
- const filterJobs = () => {
-		const filteredJobs =  data
-		  .filter((item) => (query.title ? item.company.toLowerCase().includes(query.title.toLowerCase()) || item.position.toLowerCase().includes(query.title.toLowerCase()) : ''))
-		  .filter((item) => (query.location ? item.location.toLowerCase().includes(query.location) : ''))
-		  .filter((item) => (query.contractType ? item.contract === 'Full Time' : ''));
-		setData(filteredJobs);
+	// useEffect(() => {
+	// 	if (modal) {
+	// 		locationRef.current.focus()
+	// 	} else {
+	// 		titleRef.current.focus()
+	// 	}
+	// }, [modal])
+
+	const filterJobs = async () => {
+		const jobTitle = query.title.toLowerCase().trim()
+		const jobLocation = query.location.toLowerCase().trim()
+
+		const filteredJobs = data
+			.filter(
+				(job) =>
+					job.company.toLowerCase().includes(jobTitle) ||
+					job.position.toLowerCase().includes(jobTitle)
+			)
+			.filter((job) => job.location.toLowerCase().includes(jobLocation))
+			.filter((job) =>
+				query.contractType ? job.contract === 'Full Time' : true
+			)
+
+		setData(filteredJobs)
 	}
 
-
 	const handleSubmit = (e: React.SyntheticEvent): void => {
-	// const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		// const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		filterJobs()
 	}
-
 
 	return (
 		<SearchContainer>
@@ -64,6 +72,7 @@ const Search = ({ data, setData }: SearchPropsTypes) => {
 						</Span>
 					</Label>
 					<FormInput
+						// ref={titleRef}
 						id='Filter by title'
 						type='text'
 						placeholder='Filter by title, companies, expertise...'
@@ -120,4 +129,13 @@ const Search = ({ data, setData }: SearchPropsTypes) => {
 }
 
 export default Search
-// FunctionComponent<SVGProps<SVGSVGElement>
+
+const SearchContainer = tw.section`bg-white dark:bg-blue-dark rounded-md dark:shadow-2xl `
+const Form = tw.form`flex items-center bg-white dark:bg-blue-dark text-blue-dark dark:text-grey-light  rounded-md`
+const Label = tw.label``
+const Span = tw.span``
+const Div1 = tw.div`flex items-center w-full relative`
+const Div2 = tw.div`flex items-center md:hidden px-5`
+const Div3 = tw.div`flex items-center md:hidden mr-4`
+const Div4 = tw.div`hidden md:flex items-center w-full relative border-l border-r  dark:border-grey-btn`
+const Div5 = tw.div`hidden md:flex items-center w-full pl-5 pr-4`

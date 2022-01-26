@@ -13,20 +13,10 @@ export const useData = (): [DataTypes[], React.Dispatch<React.SetStateAction<Dat
 			},
 		})
     const jobData = await res.json()
-    // return jobData
-    // setData(jobData)
 
-    if(jobData){
-      setLoading(false)
-      setData(jobData)
-    } else return []
+    setLoading(false)
+    setData(jobData)
   }
-
-  // const loadData = async () => {
-  //   const datas = await getData()
-  //   setLoading(false)
-  //   setData(datas)
-  // }
 
   useEffect(() => {
     getData()
@@ -34,13 +24,3 @@ export const useData = (): [DataTypes[], React.Dispatch<React.SetStateAction<Dat
 
   return [data, setData,  loading]
 }
-
-  // const loadData = async () => {
-	// 	const datas = await getData()
-	// 	setLoading(false)
-	// 	setData(datas)
-	// }
-
-	// useEffect(() => {
-	// 	loadData()
-	// }, [])

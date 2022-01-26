@@ -9,9 +9,10 @@ const Main = tw.main`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-
 
 const Jobs = () => {
 	const [data, setData] = useData()
+
 	return (
 		<MainContainer>
-			<Search data={data} setData={setData} />
+			<Search setData={setData} />
 			<Main>
 				{data?.map((job) => (
 					<Link to={`../job-detail/${job.id}`} key={job.id}>

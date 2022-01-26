@@ -1,7 +1,10 @@
 import tw from 'twin.macro'
 import styled from 'styled-components'
+// import { forwardRef } from 'react'
 
 type InputProps = React.ComponentPropsWithoutRef<'input'>
+// type InputProps = React.ComponentPropsWithRef<'input'>
+
 
 const Input = styled.input(({ type }) => [
 	tw`w-full flex h-[4.5rem] lg:h-[4rem] px-4 text-sm md:pl-[3.25rem] focus:outline-none focus:ring focus:ring-violet-light 
@@ -13,23 +16,7 @@ export const FormInput = ({type, ...props}: InputProps) => {
 	return <Input type={type} {...props} />
 }
 
-// interface Props {
-//   isChecked: boolean;
-//   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-//   label: string;
-// }
-
-// const Checkbox = (props: Props) => {
-//   return (
-//     <div>
-//       <label htmlFor={props.label}>{props.label}</label>
-//       <input
-//         type="checkbox"
-//         id={props.label}
-//         checked={props.isChecked}
-//         onChange={props.handleChange}
-//       />
-//     </div>
-//   );
-// };
-// export default Checkbox;
+// export const FormInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+// 	return <Input ref={ref} {...props} />
+// })
+// FormInput.displayName = 'Input'

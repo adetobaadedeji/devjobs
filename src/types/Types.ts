@@ -24,7 +24,7 @@ export type JobType = {
 }
 
 export type SearchPropsTypes = {
-	data: DataTypes[]
+	// data: DataTypes[]
 	setData: React.Dispatch<React.SetStateAction<DataTypes[]>>
 }
 
