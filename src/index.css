@@ -21,7 +21,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-input:checked ~ .dot {
+#toggle:checked ~ .dot {
   transform: translateX(100%);
   /* background-color: #48bb78; */
 }
@@ -32,6 +32,17 @@ input:checked ~ .dot {
 
 ::-webkit-scrollbar-thumb {
   @apply bg-gray-500 dark:bg-blue-dark;
+}
+
+.checkbox:checked ~ span {
+  @apply bg-violet-dark;
+}
+.checkbox:focus ~ span {
+  @apply ring ring-violet-light;
+}
+
+.checkbox:checked ~ span svg {
+  @apply flex;
 }
 
 .visually-hidden {
