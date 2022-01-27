@@ -8,29 +8,16 @@ const ModalContent = tw.main`z-50 w-11/12 mx-auto p-6 bg-white space-y-4 rounded
 
 type ModalProps = {
 	children: React.ReactNode
-	modal: boolean
-	setModal: React.Dispatch<React.SetStateAction<boolean>>
+	closeModal: () => void
 }
 
-const Modal = ({ children, modal, setModal }: ModalProps) => {
-	const closeModal = () => {
-		if (modal) {
-			setModal(!modal)
-		}
-  document.documentElement.style.overflowY = 'scroll'
-	}
-
+const Modal = ({ children, closeModal }: ModalProps) => {
 	return (
 		<ModalContainer>
 			<ModalOverlay onClick={closeModal} />
 			<ModalContent>
 				{children}
-				<CustomButton
-					type='submit'
-					text='Search'
-					className='w-full'
-					// onClick={closeModal}
-				/>
+				<CustomButton type='submit' text='Search' className='w-full' />
 			</ModalContent>
 		</ModalContainer>
 	)

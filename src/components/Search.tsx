@@ -40,6 +40,11 @@ const Search = ({ setData }: SearchPropsTypes) => {
 		setModal(true)
 	}
 
+	const closeModal = () => {
+		document.documentElement.style.overflowY = 'scroll'
+		setModal(false)
+	}
+
 	const filterJobs = async () => {
 		const jobTitle = query.title.toLowerCase().trim()
 		const jobLocation = query.location.toLowerCase().trim()
@@ -60,6 +65,7 @@ const Search = ({ setData }: SearchPropsTypes) => {
 
 	const handleSubmit = (e: React.SyntheticEvent): void => {
 		e.preventDefault()
+		closeModal()
 		filterJobs()
 	}
 
@@ -67,7 +73,7 @@ const Search = ({ setData }: SearchPropsTypes) => {
 		<SearchContainer>
 			<Form onSubmit={handleSubmit}>
 				{modal && (
-					<Modal modal={modal} setModal={setModal}>
+					<Modal closeModal={closeModal}>
 						<LocationField value={query.location} onChange={onQueryChange} />
 						<CheckField checked={query.contractType} onChange={onQueryChange} />
 					</Modal>
