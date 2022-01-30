@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import tw from 'twin.macro'
 import { ReactComponent as SearchIcon } from '../assets/desktop/icon-search.svg'
 import { ReactComponent as FilterIcon } from '../assets/mobile/icon-filter.svg'
@@ -15,12 +15,14 @@ const Form = tw.form`flex items-center bg-white dark:bg-blue-dark text-blue-dark
 const Div1 = tw.div`flex items-center w-full relative`
 const Div2 = tw.div`flex items-center md:hidden px-5`
 const Div3 = tw.div`flex items-center md:hidden mr-4`
-const Div4 = tw.div`hidden md:flex items-center w-full border-l border-r  dark:border-grey-btn`
+const Div4 = tw.div` hidden md:flex items-center w-full border-l border-r  dark:border-grey-btn`
 const Div5 = tw.div`hidden md:flex items-center w-full pl-5 pr-4`
 
 const Search = ({ setData }: SearchPropsTypes) => {
 	const [data] = useData()
 	const [modal, setModal] = useState(false)
+	const titleRef = useRef<HTMLInputElement>(null!)
+	const locationRef = useRef<HTMLInputElement>(null!)
 
 	const [query, setQuery] = useState<queryTypes>({
 		title: '',
@@ -44,6 +46,14 @@ const Search = ({ setData }: SearchPropsTypes) => {
 		document.documentElement.style.overflowY = 'scroll'
 		setModal(false)
 	}
+
+	useEffect(() => {
+		if (modal) {
+			locationRef.current.focus()
+		} else {
+			titleRef.current.focus()
+		}
+	}, [modal])
 
 	const filterJobs = async () => {
 		const jobTitle = query.title.toLowerCase().trim()
@@ -71,16 +81,16 @@ const Search = ({ setData }: SearchPropsTypes) => {
 
 	return (
 		<SearchContainer>
-			<Form onSubmit={handleSubmit}>
+			<Form onSubmit={handleSubmit} autoComplete='off'>
 				{modal && (
 					<Modal closeModal={closeModal}>
-						<LocationField value={query.location} onChange={onQueryChange} />
+						<LocationField locationRef={locationRef} value={query.location} onChange={onQueryChange} />
 						<CheckField checked={query.contractType} onChange={onQueryChange} />
 					</Modal>
 				)}
 
 				<Div1>
-					<TitleField value={query.title} onChange={onQueryChange} />
+					<TitleField titleRef={titleRef} value={query.title} onChange={onQueryChange} />
 				</Div1>
 				<Div2 onClick={() => OpenModal()}>
 					<FilterIcon />
@@ -93,7 +103,7 @@ const Search = ({ setData }: SearchPropsTypes) => {
 					/>
 				</Div3>
 				<Div4>
-					<LocationField value={query.location} onChange={onQueryChange} />
+					<LocationField locationRef={locationRef} value={query.location} onChange={onQueryChange} />
 				</Div4>
 				<Div5>
 					<CheckField checked={query.contractType} onChange={onQueryChange} />

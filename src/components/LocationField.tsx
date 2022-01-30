@@ -1,23 +1,26 @@
 import tw from 'twin.macro'
 import { ReactComponent as LocationIcon } from '../assets/desktop/icon-location.svg'
-import { FormInput } from './Input'
+import { FormInput } from './FormInput'
 
+const FieldContainer = tw.div`relative border-b dark:border-grey-btn md:border-0`
 const Label = tw.label``
 const Span = tw.span``
 
 type FieldProps = {
-  value: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+	locationRef: React.Ref<HTMLInputElement>
+	value: string
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const LocationField = ({value, onChange}: FieldProps) => {
+const LocationField = ({locationRef, value, onChange}: FieldProps) => {
 	return (
-		<>
-			<LocationIcon className='absolute left-5 z-20 text-violet-dark' />
+		<FieldContainer>
+			<LocationIcon className='absolute left-5 top-1/3 z-20 text-violet-dark' />
 			<Label htmlFor='Filter by location'>
-				<Span className='visually-hidden'>Filter by location</Span>
+				<Span className='sr-only'>Filter by location</Span>
 			</Label>
 			<FormInput
+				ref={locationRef}
 				id='Filter by location'
 				type='text'
 				placeholder='Filter by location'
@@ -25,7 +28,7 @@ const LocationField = ({value, onChange}: FieldProps) => {
 				value={value}
 				onChange={onChange}
 			/>
-		</>
+		</FieldContainer>
 	)
 }
 export default LocationField

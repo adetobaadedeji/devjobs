@@ -1,7 +1,22 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom'
+import NotFoundImg from '../assets/undraw_blank_canvas_-3-rbb.svg'
+import SectionContainer from '../components/SectionContainer'
 
 const NotFound = () => {
-  return <div></div>;
-};
-
-export default NotFound;
+	const navigate = useNavigate()
+	return (
+		<SectionContainer>
+			<main className='max-w-sm mx-auto flex flex-col justify-center items-center text-center'>
+				<p className='py-10 text-2xl'>This page cannot be found...</p>
+				<img className='max-w-full pb-10' src={NotFoundImg} alt='Not found' />
+				<button
+					onClick={() => navigate(-1)}
+					className='bg-violet-dark text-white hover:bg-violet-light px-4 py-2 rounded'
+				>
+					Go back
+				</button>
+			</main>
+		</SectionContainer>
+	)
+}
+export default NotFound

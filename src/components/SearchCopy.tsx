@@ -83,7 +83,7 @@ const Search = ({ setData }: SearchPropsTypes) => {
 						value={query.title}
 						onChange={onQueryChange}
 					/> */}
-					<TitleField value={query.title} onChange={onQueryChange} />
+					{/* <TitleField value={query.title} onChange={onQueryChange} /> */}
 				</Div1>
 				<Div2>
 					<FilterIcon />
@@ -108,7 +108,7 @@ const Search = ({ setData }: SearchPropsTypes) => {
 						value={query.location}
 						onChange={onQueryChange}
 					/> */}
-					<LocationField value={query.location} onChange={onQueryChange} />
+					{/* <LocationField value={query.location} onChange={onQueryChange} /> */}
 				</Div4>
 				<Div5>
 					{/* <CheckField>
