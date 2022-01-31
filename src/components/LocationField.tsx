@@ -2,7 +2,7 @@ import tw from 'twin.macro'
 import { ReactComponent as LocationIcon } from '../assets/desktop/icon-location.svg'
 import { FormInput } from './FormInput'
 
-const FieldContainer = tw.div`relative border-b dark:border-grey-btn md:border-0`
+const FieldContainer = tw.div`w-full relative border-b dark:border-grey-btn md:border-0`
 const Label = tw.label``
 const Span = tw.span``
 
